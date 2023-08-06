@@ -27,14 +27,49 @@ function playNote(freq){
     node.connect(audioCtx.destination);
 }
 
+// Average case generator
+function avg(){
+    for (let i = 0; i<n; ++i){
+        array[i] = Math.random();
+    }
+}
+
 // init function
-function init(){
+function init(type){
 
     // clears the timeout necessary to stop play
     clearTimeout(timeout);
 
-    for (let i = 0; i<n; ++i){
-        array[i] = Math.random();
+    avg();
+
+    if ( type == 2 ){  // Average case
+
+    }
+
+    else if ( type == 1){   // Best case
+        do{
+            var swapped = false;
+            for(let i = 1; i<array.length; ++i){
+                if (array[i-1] > array[i] ){
+                    swapped = true;
+                    [array[i-1], array[i]] = [array[i], array[i-1]];
+                }
+            }
+        } while (swapped);
+    }
+
+    else if ( type == 3 ){ // Worst Case
+        do{
+            var swapped = false;
+            for(let i = 1; i<array.length; ++i){
+                if (array[i-1] > array[i] ){
+                    swapped = true;
+                    [array[i-1], array[i]] = [array[i], array[i-1]];
+                }
+            }
+        } while (swapped);
+
+        array.reverse();
     }
 
     showBars();
@@ -42,6 +77,9 @@ function init(){
 
 // play function
 function play(){
+    // clears the timeout necessary to stop play
+    clearTimeout(timeout);
+
     // make the copy of array to get the moves 
     const copy = [...array]
 

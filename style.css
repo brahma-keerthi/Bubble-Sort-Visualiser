@@ -4,6 +4,11 @@
     align-items: flex-end;
 }
 
+#playButton{
+    display: flex;
+    align-items: center;
+}
+
 body{
     display: flex;
     align-items: center;
